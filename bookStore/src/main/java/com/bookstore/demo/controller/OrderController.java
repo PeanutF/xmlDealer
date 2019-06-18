@@ -33,4 +33,9 @@ public class OrderController {
         return orderService.showCart(userId);
     }
 
+    @RequestMapping("/showOrder")
+    public List<Order> showOrder(@RequestBody int userId){
+        return orderService.showOrder(userId);
+    }
+
 }

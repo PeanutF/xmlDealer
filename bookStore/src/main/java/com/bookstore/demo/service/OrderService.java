@@ -4,7 +4,6 @@ import com.bookstore.demo.mapper.BookMapper;
 import com.bookstore.demo.mapper.BookOrderMapper;
 import com.bookstore.demo.mapper.OrderMapper;
 import com.bookstore.demo.model.*;
-import jdk.internal.loader.BootLoader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -99,5 +98,16 @@ public class OrderService {
 
 
         }
+    }
+
+
+    //显示订单时没有显示书籍
+    public List<Order> showOrder(int userId){
+        OrderExample orderExample = new OrderExample();
+        OrderExample.Criteria criteria = orderExample.createCriteria();
+        criteria.andUserNumberEqualTo(userId);
+        criteria.andPaymentStatusEqualTo(1);
+
+        return orderMapper.selectByExample(orderExample);
     }
 }
