@@ -1,8 +1,10 @@
 package com.bookstore.demo.service;
 
 import com.bookstore.demo.mapper.BookMapper;
+import com.bookstore.demo.mapper.OrderlistMapper;
 import com.bookstore.demo.model.Book;
 import com.bookstore.demo.model.BookExample;
+import com.bookstore.demo.model.OrderlistExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,9 @@ public class BookService {
 
     @Autowired
     BookMapper bookMapper;
+
+    @Autowired
+    OrderlistMapper orderlistMapper;
 
 
 
@@ -60,7 +65,8 @@ public class BookService {
         data.put("100+",high);
         data.put("50-100",middle);
         data.put("0-50",low);
-        //todo 订单量
+        data.put("orderQuantity",orderlistMapper.countByExample(new OrderlistExample()));
+
         return data;
 
     }

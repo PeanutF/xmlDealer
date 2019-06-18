@@ -1,0 +1,203 @@
+/*
+
+所有接口均采用restful api封装格式
+传递数据为json
+
+
+格式：
+请求url
+
+请求数据
+
+返回数据 { } 表示成功时不返回数据
+请求数据 { } 表示无需请求数据
+
+*/
+
+
+/*
+    备注：购物车为订单表中 paymentStatus = 0的订单
+
+
+*/
+
+
+添加书本到购物车
+//只添加书本名称，忽略数量
+
+127.0.0.1:8088/order/addToCart
+
+{
+	"book":{
+		"bookNumber":"760590b2-7687-47ce-a4dd-1ff10b16a74e",
+		"price":"1",
+		"quantity":"2"
+		},
+	"userId":111
+}
+
+{ }
+
+
+提交订单
+//订单提交只能通过购物车界面进行
+//注意books是一个数组，可以添加多本书，数量写在书的quantity里面
+//注意提交的时候的书本数量要少于库存 防止出现负数
+
+127.0.0.1:8088/order/commit
+
+{
+	"books":[{
+		"bookNumber":"760590b2-7687-47ce-a4dd-1ff10b16a74e",
+		"price":"1",
+		"quantity":"2"
+	}],
+	"userId":111
+}
+
+{ }
+
+
+显示购物车
+
+127.0.0.1:8088/order/showCart
+
+{	
+	"userId":111
+}
+
+[
+    {
+        "bookNumber": "760590b2-7687-47ce-a4dd-1ff10b16a74e",
+        "bookName": "1",
+        "price": 1,
+        "quantity": -1
+    }
+]
+
+
+显示订单
+
+127.0.0.1:8088/order/showOrder
+
+{
+	"userId":111
+}
+
+[
+    {
+        "orderNumber": "10dd1791-2c10-46b7-97a2-559c2667a4a7",
+        "userNumber": 111,
+        "totalPrice": 4,
+        "totalQuantity": 4,
+        "paymentStatus": 1
+    },
+    {
+        "orderNumber": "cae51a5d-3d37-4edd-8ea5-a61c3ef377e5",
+        "userNumber": 111,
+        "totalPrice": 2,
+        "totalQuantity": 2,
+        "paymentStatus": 1
+    },
+    {
+        "orderNumber": "ce512f63-5e1b-44e5-8462-8fbe528876f1",
+        "userNumber": 111,
+        "totalPrice": 2,
+        "totalQuantity": 2,
+        "paymentStatus": 1
+    },
+    {
+        "orderNumber": "f5b12353-2361-4463-b765-21c82ef3491f",
+        "userNumber": 111,
+        "totalPrice": 2,
+        "totalQuantity": 2,
+        "paymentStatus": 1
+    }
+]
+
+
+添加书籍
+
+127.0.0.1:8088/book/add
+
+{
+	"bookName":"newBook",
+	"price":"1",
+	"quantity":"100"
+}
+
+{ }
+
+
+显示书籍
+
+127.0.0.1:8088/book/find
+
+{ }
+
+[
+    {
+        "bookNumber": "1ee91fd5-25d3-4a34-b22d-184b8b6efe60",
+        "bookName": "newBook",
+        "price": 1,
+        "quantity": 100
+    },
+    {
+        "bookNumber": "760590b2-7687-47ce-a4dd-1ff10b16a74e",
+        "bookName": "1",
+        "price": 1,
+        "quantity": -1
+    },
+    {
+        "bookNumber": "aa7b5daa-02ca-4577-8520-de73f710cc29",
+        "bookName": "1",
+        "price": 1,
+        "quantity": 1
+    }
+]
+
+
+删除书籍
+//删除时选择没有存在于购物车或订单中的书籍 不然会有外键冲突
+
+127.0.0.1:8088/book/delete
+
+{
+"bookNumber": "1ee91fd5-25d3-4a34-b22d-184b8b6efe60"
+}
+
+{ }
+
+更改书籍信息
+//书的编号为必须项 其余为可选项（可不写入请求数据中）
+
+127.0.0.1:8088/book/update
+
+{
+"bookNumber": "760590b2-7687-47ce-a4dd-1ff10b16a74e",
+"bookName":"updateBook",
+"price":1001,
+"quantity":1200
+}
+
+{ }
+
+
+统计数据
+//total为书籍类别数目 一本书为一个类别
+//0-50 为价格区间在0-50的书本数目 以此类推
+//totalStock为书籍总库存
+//orderQuantity为订单总数量
+
+127.0.0.1:8088/book/statistics
+
+{ }
+
+{
+    "total": 2,
+    "50-100": 0,
+    "totalStock": 1201,
+    "100+": 1,
+    "0-50": 1,
+    "orderQuantity": 5
+}
