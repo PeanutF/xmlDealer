@@ -29,9 +29,7 @@
 
 {
 	"book":{
-		"bookNumber":"760590b2-7687-47ce-a4dd-1ff10b16a74e",
-		"price":"1",
-		"quantity":"2"
+		"bookNumber":"760590b2-7687-47ce-a4dd-1ff10b16a74e"
 		},
 	"userId":111
 }

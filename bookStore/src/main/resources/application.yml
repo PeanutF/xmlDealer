@@ -6,6 +6,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
 
 
+
 server:
   tomcat:
     uri-encoding: UTF-8
@@ -14,4 +15,5 @@ server:
 
 mybatis:
   mapperLocations: classpath:mapper/*.xml
+
 
