@@ -5,6 +5,9 @@ spring:
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
 
+  themeleaf:
+    cache: false
+
 
 
 server:

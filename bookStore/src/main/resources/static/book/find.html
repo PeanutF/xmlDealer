@@ -2,6 +2,8 @@
 <html class="no-js" lang="en">
 
 <head>
+	
+	<!-- 原增删改查CSS -->
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>网上书店管理</title>
@@ -11,6 +13,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/shards.min.css">
     <link rel="stylesheet" href="css/shards-demo.css?v=1.1.0">
+	
+	
 </head>
 
 <body>
@@ -33,19 +37,7 @@
 <!-- Page Content -->
 <div class="page-content">
     <!-- Content -->
-    <div class="content clearfix">
 
-
-
-        <!-- Typography -->
-        <div id="typography" class="container mb-5">
-            <div class="section-title col-lg-8 col-md-10 ml-auto mr-auto" style="left: 125px;">
-                <h3 class="mb-4" action="demo_form.asp" method="get">
-					<input type="text" class="bar5" placeholder="请输入您要搜索的书名..." onfocus="this.placeholder=''" onblur="this.placeholder='请输入您要搜索的书名...'"/>
-					<button type="button" style="border-radius: 10px;outline: #000000;">搜索</button>
-				</h3>
-
-            </div>
 
             <div class="example col-md-10 ml-auto mr-auto">
                 <table class="table table-striped table-responsive">
@@ -54,11 +46,8 @@
                         <th>编号</th>
                         <th>书名</th>
                         <th>库存</th>
-                        <th>单价</th>
-                        <th>
-							<button type="button" style="width: 40px;height: 30px;border-radius: 5px;outline: #000000;background: #e8e8e8;margin-right: 50px;">修改</button>
-							<button type="button" style="width: 40px;height: 30px;border-radius: 5px;outline: #000000;background: #e8e8e8;">删除</button>
-						</th>
+                        <th>单价/元</th>
+                        <th>管理</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -100,12 +89,39 @@
                     </tr>
                     </tbody>
                 </table>
-            </div>
-        </div>
-    </div>
+				
+				<div style="padding-left: 590px;">
+					<button type="button" class="button1" onclick="popBox()">+</button>
+				</div>
 </div>
 
-<!-- JavaScript -->
+
+
+<div id="popBox">
+    <div class="close">
+		<div style="background-color: #5a84fd;">
+			<a href="javascript:void(0)" onclick="closeBox()">×</a>
+		</div>
+    </div>
+	<br>
+    <form action="#" style="padding-left: 100px; padding-top: 100px;">
+	书籍编号:<br>
+	<input type="text" name="firstname">
+	<br>
+	书籍名称:<br>
+	<input type="text" name="lastname">
+	<br>
+	书籍数量:<br>
+	<input type="text">
+	<br>
+	单价/元:<br>
+	<input type="text">
+	<br><br>
+	<input type="submit" value="Submit" class="button1">
+	</form> 
+</div>
+</div>
+<!-- 原JavaScript -->
 
 
 <script src="js/buttons.js"></script>
@@ -115,6 +131,27 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
 <script src="js/shards.min.js"></script>
 <script src="js/demo.min.js"></script>
+
+
+<script>
+    /*点击弹出按钮*/
+    function popBox() {
+        var popBox = document.getElementById("popBox");
+        var popLayer = document.getElementById("popLayer");
+        popBox.style.display = "block";
+        popLayer.style.display = "block";
+    };
+ 
+    /*点击关闭按钮*/
+    function closeBox() {
+        var popBox = document.getElementById("popBox");
+        var popLayer = document.getElementById("popLayer");
+        popBox.style.display = "none";
+        popLayer.style.display = "none";
+    }
+</script>
+
+
 
 </body>
 </html>
