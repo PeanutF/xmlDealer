@@ -54,7 +54,33 @@ input:focus{
             color: #2D2C3B;
         }
 
-
+        #popBox1 {
+            display: none;
+            background-color: #f7f8fb;
+            z-index: 11;
+            width: 500px;
+            height: 600px;
+            position:fixed;
+            top:0;
+            right:0;
+            left:0;
+            bottom:0;
+            margin:auto;
+						border-radius: 10px;
+						box-shadow: darkgray 2px 2px 2px 2px;
+        }
+ 
+        #popBox1 .close{
+            text-align: right;
+            margin-right: 5px;
+            background-color: #F8F8F8;
+        }
+ 
+        /*关闭按钮*/
+        #popBox1 .close a {
+            text-decoration: none;
+            color: #2D2C3B;
+        }
 
 
 

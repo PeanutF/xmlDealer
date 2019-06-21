@@ -95,7 +95,7 @@
 				</div>
 </div>
 
-
+<!-- 添加popBox -->
 
 <div id="popBox">
     <div class="close">
@@ -105,6 +105,8 @@
     </div>
 	<br>
     <form action="#" style="padding-left: 100px; padding-top: 100px;">
+	<h4>请填写要添加的书籍信息：</h4>
+	<br>
 	书籍编号:<br>
 	<input type="text" name="firstname">
 	<br>
@@ -117,10 +119,45 @@
 	单价/元:<br>
 	<input type="text">
 	<br><br>
-	<input type="submit" value="Submit" class="button1">
+	<a href="#" onclick="closeBox()">
+		<input type="submit" value="Submit" class="button1" onclick="addFunction()">
+	</a>
 	</form> 
 </div>
 </div>
+
+
+<!-- 修改popBox -->
+
+<div id="popBox1">
+    <div class="close">
+		<div style="background-color: #5a84fd;">
+			<a href="javascript:void(0)" onclick="closeBox1()">×</a>
+		</div>
+    </div>
+	<br>
+    <form action="#" style="padding-left: 100px; padding-top: 100px;">
+	<h4>请填写修改后的书籍信息：</h4>
+	<br>
+	书籍编号:<br>
+	<input type="text" name="firstname">
+	<br>
+	书籍名称:<br>
+	<input type="text" name="lastname">
+	<br>
+	书籍数量:<br>
+	<input type="text">
+	<br>
+	单价/元:<br>
+	<input type="text">
+	<br><br>
+	<a href="#" onclick="closeBox1()">
+		<input type="submit" value="Submit" class="button1" onclick="changeFunction()">
+	</a>
+	</form> 
+</div>
+</div>
+
 <!-- 原JavaScript -->
 
 
@@ -151,7 +188,35 @@
     }
 </script>
 
+<script>
+    /*点击弹出按钮*/
+    function popBox1() {
+        var popBox = document.getElementById("popBox1");
+        var popLayer = document.getElementById("popLayer1");
+        popBox.style.display = "block";
+        popLayer.style.display = "block";
+    };
+ 
+    /*点击关闭按钮*/
+    function closeBox1() {
+        var popBox = document.getElementById("popBox1");
+        var popLayer = document.getElementById("popLayer1");
+        popBox.style.display = "none";
+        popLayer.style.display = "none";
+    }
+</script>
 
+<script>
+function addFunction(){
+	alert("书籍添加成功！");
+}
+</script>
+
+<script>
+function changeFunction(){
+	alert("书籍修改成功！");
+}
+</script>
 
 </body>
 </html>
