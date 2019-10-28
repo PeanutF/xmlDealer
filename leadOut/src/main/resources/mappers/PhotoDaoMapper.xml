@@ -1,0 +1,47 @@
+<!--
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+&lt;!&ndash; mapper:根标签，namespace：命名空间，随便写，一般保证命名空间唯一 &ndash;&gt;
+<mapper namespace="PhotoDao">
+    &lt;!&ndash; statement，内容：sql语句。id：唯一标识，随便写，在同一个命名空间下保持唯一
+       resultType：sql语句查询结果集的封装类型
+     &ndash;&gt;
+
+    &lt;!&ndash;使用别名&ndash;&gt;
+
+    <resultMap id="PhotoMap" type="com.leadOut.entity.Photo">
+        <result property="id" column="ID" jdbcType = "NUMERIC"/>
+        <result property="name" column="AUTOGRAPH"/>
+        <result property="createdate" column="DATEORIGINAL"/>
+        <result property="camerist" column="LOCATION"/>
+&lt;!&ndash;        <result property="creator" column="PHOTOGRAPHER"/>&ndash;&gt;
+        <result property="description" column="SHOOTCONTENT"/>
+        <result property="creator" column="PHOTOGRAPHER" />
+&lt;!&ndash;        <result property="createUser" column="ADDUSER" />
+        <result property="createDate" column="ADDDATE" />
+        T_PHOTO里面没有这两项 &ndash;&gt;
+
+    </resultMap>
+
+    &lt;!&ndash;as之前的oracle会默认转为大写&ndash;&gt;
+    &lt;!&ndash;todo&ndash;&gt;
+    <select id="queryAll" resultMap="PhotoMap">
+        select
+         *
+
+         from T_PHOTO
+         where rownum &lt; 10
+    </select>
+
+    <select id="queryByTime" resultMap="PhotoMap" parameterType="hashMap">
+        select
+         *
+
+         from T_PHOTO
+         where DATEORIGINAL &gt; #{startTimeS} and DATEORIGINAL &lt; #{endTimeS}
+    </select>
+
+</mapper>
+-->

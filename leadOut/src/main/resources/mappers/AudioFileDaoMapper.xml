@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- mapper:根标签，namespace：命名空间，随便写，一般保证命名空间唯一 -->
+<mapper namespace="AudioFileDao">
+
+
+    <select id="queryByTime"  resultType="com.leadOut.entity.AudioFile" parameterType="hashMap">
+        select
+         *
+
+         from VIEW_AUDIOFILE
+
+         where CREATEDATE &gt; #{startTimeS} and CREATEDATE &lt; #{endTimeS}
+
+
+    </select>
+
+</mapper>

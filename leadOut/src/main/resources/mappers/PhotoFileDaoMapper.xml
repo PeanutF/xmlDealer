@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- mapper:根标签，namespace：命名空间，随便写，一般保证命名空间唯一 -->
+<mapper namespace="PhotoFileDao">
+    <!-- statement，内容：sql语句。id：唯一标识，随便写，在同一个命名空间下保持唯一
+       resultType：sql语句查询结果集的封装类型,tb_user即为数据库中的表
+     -->
+    <!--<select id="queryUserById" resultType="com.zpc.mybatis.pojo.User">-->
+    <!--select * from tb_user where id = #{id}-->
+    <!--</select>-->
+
+    <!--使用别名-->
+
+    <!--as之前的oracle会默认转为大写-->
+<!--    <resultMap id="PhotoFileMap" type="com.leadOut.entity.PhotoFile">
+        <result property="id" column="ID" jdbcType = "NUMERIC"/>
+        <result property="name_" column="AUTOGRAPH"/>
+        <result property="createDate" column="DATEORIGINAL"/>
+        <result property="camerist" column="LOCATION"/>
+        <result property="creator" column="PHOTOGRAPHER"/>
+        <result property="description" column="SHOOTCONTENT"/>
+        <result property="security" column="SECURITY" />
+        <result property="createUser_" column="ADDUSER" />
+        <result property="createDate_" column="ADDDATE" />
+        <result property="streamMedia" column="ORIGINALPATH" />
+
+    </resultMap>-->
+
+    <select id="queryAll" >
+        select
+         *
+
+         from T_PHOTOFILE
+    </select>
+
+    <select id="queryByPhotoId"  resultType="com.leadOut.entity.PhotoFile">
+        select
+         *
+
+         from VIEW_PHOTOFILE
+
+         where PHOTOID = #{id,jdbcType=NUMERIC}
+
+
+    </select>
+
+    <select id="queryByTime"  resultType="com.leadOut.entity.PhotoFile" parameterType="hashMap">
+        select
+         *
+
+         from VIEW_PHOTOFILE
+
+         where CREATEDATE &gt; #{startTimeS} and CREATEDATE &lt; #{endTimeS}
+
+
+    </select>
+
+</mapper>
