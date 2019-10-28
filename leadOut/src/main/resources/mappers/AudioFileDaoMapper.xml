@@ -12,7 +12,7 @@
 
          from VIEW_AUDIOFILE
 
-         where CREATEDATE &gt; #{startTimeS} and CREATEDATE &lt; #{endTimeS}
+         where CREATEDATE &gt;= #{startTimeS} and CREATEDATE &lt;= #{endTimeS}
 
 
     </select>
