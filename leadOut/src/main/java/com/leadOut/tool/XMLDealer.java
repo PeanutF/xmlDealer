@@ -13,6 +13,8 @@ import java.io.FileOutputStream;
 
 public class XMLDealer {
 
+
+
     public void addAttribute(Element entityData, String itemCode,String itemName,String value)
     {
         Element attributeItem2 = entityData.addElement("AttributeItem");
@@ -60,8 +62,11 @@ public class XMLDealer {
     }
 
 
-    public void createPhotoXMLFile(PhotoFile photoFile, File file){
+    public void createPhotoXMLFile(PhotoFile photoFile, String fileName){
         try {
+            File file = new File(fileName);
+
+
             Document document = DocumentHelper.createDocument();
             Element root = document.addElement("UnifiedExchangeProtocol");
             Element contentInfo = root.addElement("ContentInfo");
@@ -74,8 +79,8 @@ public class XMLDealer {
             Element fileItem = contentFile.addElement("FileItem");
             String guid = new GUID().toString().replace("-","");;
             fileItem.addElement("FileGUID").addText(guid);
-            Element fileName = fileItem.addElement("FileName");
-            fileName.addElement("FullPath").addText(photoFile.getOriginalPath());
+            Element fileName1 = fileItem.addElement("FileName");
+            fileName1.addElement("FullPath").addText(photoFile.getOriginalPath().substring(1).replace("/","\\"));
 
 
             //EntityData 的处理部分
@@ -91,8 +96,11 @@ public class XMLDealer {
     }
 
 
-    public void createAudioXMLFile(AudioFile audioFile, File file){
+    public void createAudioXMLFile(AudioFile audioFile, String fileName){
         try {
+            File file = new File(fileName);
+
+
             Document document = DocumentHelper.createDocument();
             Element root = document.addElement("UnifiedExchangeProtocol");
             Element contentInfo = root.addElement("ContentInfo");
@@ -105,14 +113,15 @@ public class XMLDealer {
             Element fileItem = contentFile.addElement("FileItem");
             String guid = new GUID().toString().replace("-","");
             fileItem.addElement("FileGUID").addText(guid);
-            Element fileName = fileItem.addElement("FileName");
-            fileName.addElement("FullPath").addText(audioFile.getStreamMedia());
+            Element fileName1 = fileItem.addElement("FileName");
+            fileName1.addElement("FullPath").addText(audioFile.getStreamMedia().substring(1).replace("/","\\"));
 
             Element fileItem2 = contentFile.addElement("FileItem");
             String guid2 = new GUID().toString().replace("-","");;
             fileItem2.addElement("FileGUID").addText(guid2);
             Element fileName2 = fileItem2.addElement("FileName");
-            fileName2.addElement("FullPath").addText(audioFile.getDigitalMater());
+            String fullPath = audioFile.getDigitalMater();
+            fileName2.addElement("FullPath").addText(fullPath.substring(1).replace("/","\\"));
 
             //EntityData 的处理部分
             entityData = addEntity(audioFile, entityData);

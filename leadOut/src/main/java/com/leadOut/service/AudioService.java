@@ -51,7 +51,7 @@ public class AudioService {
             String fileName = path + "\\" + audioFile.getId()+".xml";
             tot++;
             Layout.process = tot * 100 / audioFiles.size();
-            dealer.createAudioXMLFile(audioFile,new File(fileName));
+            dealer.createAudioXMLFile(audioFile,fileName);
         }
 
         if (audioFiles.size() == 0){

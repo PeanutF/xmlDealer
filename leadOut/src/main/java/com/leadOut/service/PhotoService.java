@@ -78,7 +78,7 @@ public class PhotoService {
             String fileName = path + "\\" + photoFile.getId()+".xml";
             tot++;
             Layout.process = tot * 100 / photoFiles.size();
-            dealer.createPhotoXMLFile(photoFile,new File(fileName));
+            dealer.createPhotoXMLFile(photoFile,fileName);
         }
 
         if (photoFiles.size() == 0){
