@@ -23,6 +23,20 @@ public class XMLDealer {
         attributeItem2.addElement("Value").addText(value);
     }
     public Element addEntity(AudioFile audioFile, Element entityData) {
+        addAttribute(entityData,"clipguid","素材GUID",audioFile.getGuid());
+        addAttribute(entityData,"name","素材名称",audioFile.getName_());
+        addAttribute(entityData,"clipname","素材名称","");
+        addAttribute(entityData,"creatorcode","创建人编码",audioFile.getCreateUser_());
+        Element attributeItem2 = entityData.addElement("AttributeItem");
+        attributeItem2.addElement("ItemCode").addText("loginname");
+        attributeItem2.addElement("Value").addText("");
+
+        Element attributeItem1 = entityData.addElement("AttributeItem");
+        attributeItem1.addElement("ItemCode").addText("columncode");
+        attributeItem1.addElement("Value").addText("");
+        addAttribute(entityData,"columnname","栏目名称","");
+
+
         addAttribute(entityData,"name_","题名",audioFile.getName_());
         addAttribute(entityData,"createdate","拍摄时间",audioFile.getCreateDate());
         addAttribute(entityData,"camerist","拍摄地点",audioFile.getCamerist());
@@ -41,6 +55,21 @@ public class XMLDealer {
     }
 
     public Element addEntity(PhotoFile photoFile, Element entityData) {
+        addAttribute(entityData,"clipguid","素材GUID",photoFile.getGuid());
+        addAttribute(entityData,"name","素材名称",photoFile.getName_());
+        addAttribute(entityData,"clipname","素材名称","");
+        addAttribute(entityData,"creatorcode","创建人编码",photoFile.getCreateUser_());
+        Element attributeItem2 = entityData.addElement("AttributeItem");
+        attributeItem2.addElement("ItemCode").addText("loginname");
+        attributeItem2.addElement("Value").addText("");
+
+        Element attributeItem1 = entityData.addElement("AttributeItem");
+        attributeItem1.addElement("ItemCode").addText("columncode");
+        attributeItem1.addElement("Value").addText("");
+        addAttribute(entityData,"columnname","栏目名称","");
+
+
+
         addAttribute(entityData,"name_","图片题名",photoFile.getName_());
         addAttribute(entityData,"createdate","拍摄时间",photoFile.getCreateDate());
         addAttribute(entityData,"camerist","拍摄地点",photoFile.getCamerist());
@@ -62,16 +91,22 @@ public class XMLDealer {
     }
 
 
-    public void createPhotoXMLFile(PhotoFile photoFile, String fileName){
+    public void createPhotoXMLFile(PhotoFile photoFile, String fileName, int order){
         try {
             File file = new File(fileName);
 
 
             Document document = DocumentHelper.createDocument();
             Element root = document.addElement("UnifiedExchangeProtocol");
+
+            Element head = root.addElement("Head");
+            head.addElement("TaskGUID").addText(photoFile.getGuid());
+            head.addElement("TaskName").addText("宜昌媒资数据导出任务" + order);
+
             Element contentInfo = root.addElement("ContentInfo");
-            contentInfo.addElement("ContentId").addText(String.valueOf(photoFile.getPhotoId()));
+            contentInfo.addElement("ContentID").addText(photoFile.getGuid());
             contentInfo.addElement("TypeID").addText("picture");
+            contentInfo.addElement("TypeName").addText("图片");
             Element contentData = contentInfo.addElement("ContentData");
             Element contentFile = contentData.addElement("ContentFile");
             Element entityData = contentData.addElement("EntityData");
@@ -96,16 +131,22 @@ public class XMLDealer {
     }
 
 
-    public void createAudioXMLFile(AudioFile audioFile, String fileName){
+    public void createAudioXMLFile(AudioFile audioFile, String fileName, int order){
         try {
             File file = new File(fileName);
 
 
             Document document = DocumentHelper.createDocument();
             Element root = document.addElement("UnifiedExchangeProtocol");
+
+            Element head = root.addElement("Head");
+            head.addElement("TaskGUID").addText(audioFile.getGuid());
+            head.addElement("TaskName").addText("宜昌媒资数据导出任务" + order);
+
             Element contentInfo = root.addElement("ContentInfo");
-            contentInfo.addElement("ContentId").addText(String.valueOf(audioFile.getId()));
+            contentInfo.addElement("ContentID").addText(audioFile.getGuid());
             contentInfo.addElement("TypeID").addText("video");
+            contentInfo.addElement("TypeName").addText("视音频");
             Element contentData = contentInfo.addElement("ContentData");
             Element contentFile = contentData.addElement("ContentFile");
             Element entityData = contentData.addElement("EntityData");

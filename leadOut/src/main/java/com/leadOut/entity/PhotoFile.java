@@ -12,6 +12,7 @@ public class PhotoFile {
         this.photoId = photoId;
     }
 
+    private String guid;
     private int photoId;
 
 
@@ -33,6 +34,14 @@ public class PhotoFile {
     private String keyWord = "";
     private long fileSize = 0;
     private String fileext = "";
+
+    public String getGuid() {
+        return guid;
+    }
+
+    public void setGuid(String guid) {
+        this.guid = guid;
+    }
 
     public String getCategoryCode() {
         return categoryCode;

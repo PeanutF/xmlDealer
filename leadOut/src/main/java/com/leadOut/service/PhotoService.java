@@ -5,6 +5,7 @@ import com.leadOut.dao.PhotoFileDao;
 import com.leadOut.entity.AudioFile;
 import com.leadOut.entity.PhotoFile;
 import com.leadOut.impl.PhotoFileDaoImpl;
+import com.leadOut.tool.GUID;
 import com.leadOut.tool.LogCreator;
 import com.leadOut.tool.XMLDealer;
 import org.apache.ibatis.io.Resources;
@@ -15,7 +16,10 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class PhotoService {
 
@@ -78,19 +82,20 @@ public class PhotoService {
             String fileName = path + "\\" + photoFile.getId()+".xml";
             tot++;
             Layout.process = tot * 100 / photoFiles.size();
-            dealer.createPhotoXMLFile(photoFile,fileName);
+            photoFile.setGuid(new GUID().toString().replace("-",""));
+            dealer.createPhotoXMLFile(photoFile,fileName,tot);
         }
 
         if (photoFiles.size() == 0){
             Layout.empty = true;
         }else {
-            int[] ids = new int[photoFiles.size()];
-            int sub = 0;
+            HashMap<String,String> GUIDMap = new HashMap<String, String>();
+
+
             for (PhotoFile photoFile : photoFiles){
-                ids[sub] = photoFile.getId();
-                sub ++;
+                GUIDMap.put(String.valueOf(photoFile.getId()),photoFile.getGuid());
             }
-            new LogCreator().record(startTimeS,endTimeS,photoFiles.size(),ids,"图片");
+            new LogCreator().record(startTimeS,endTimeS,photoFiles.size(),GUIDMap,"图片");
         }
     }
 

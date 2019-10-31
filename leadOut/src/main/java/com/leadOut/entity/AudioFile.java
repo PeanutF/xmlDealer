@@ -3,6 +3,7 @@ package com.leadOut.entity;
 public class AudioFile {
 
     private int id;
+    private String guid;
     private String name_ = "";
     private String createDate = "";
     private String camerist = "";
@@ -23,6 +24,14 @@ public class AudioFile {
 //    private long fileSize = 0;
 //    private String fileext = "";
 
+
+    public String getGuid() {
+        return guid;
+    }
+
+    public void setGuid(String guid) {
+        this.guid = guid;
+    }
 
     public int getId() {
         return id;

@@ -2,13 +2,16 @@ package com.leadOut.tool;
 
 import java.io.*;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class LogCreator {
 
     RandomAccessFile file;
 
-    public void record(String startTime, String endTime, int totRecord, int[] ids, String type){
+    public void record(String startTime, String endTime, int totRecord, HashMap<String,String> GUIDMap, String type){
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
             String time = dateFormat.format(new Date());
@@ -24,9 +27,9 @@ public class LogCreator {
             StringBuffer buffer = new StringBuffer();
             buffer.append(info);
 
-            for (int id : ids){
-                String fileInfo = "ID:" + id + ";"
-                        + "       xml文件名：" + id + ".xml" + "\n";
+            for (String key:GUIDMap.keySet()){
+                String fileInfo = "ID:" + key + ";"
+                        + "       xml文件名：" + key + ".xml" + "; GUID:" + GUIDMap.get(key) + "\n";
                 buffer.append(fileInfo);
             }
             try {
