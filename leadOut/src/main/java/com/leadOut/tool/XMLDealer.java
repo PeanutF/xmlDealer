@@ -10,6 +10,10 @@ import org.dom4j.io.XMLWriter;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class XMLDealer {
 
@@ -20,34 +24,52 @@ public class XMLDealer {
         Element attributeItem2 = entityData.addElement("AttributeItem");
         attributeItem2.addElement("ItemCode").addText(itemCode);
         attributeItem2.addElement("ItemName").addText(itemName);
-        attributeItem2.addElement("Value").addText(value);
+        if(value != "" && !value.substring(0,1).equals(" ")){
+            if (value.equals("内部公开") && itemCode.equals("privilege"))
+                attributeItem2.addElement("Value").addText("公开");
+            else if (itemCode.equals("createdate")){
+
+                int a = value.length();
+                if (value.length() == 4 || value.substring(4,6).equals("  "))
+                    attributeItem2.addElement("Value").addText(value.substring(0,4) + "-01-01");
+                else if (value.length() == 6 || value.substring(6,8).equals("  "))
+                    attributeItem2.addElement("Value").addText(value.substring(0,4) + "-" + value.substring(4,6) + "-01");
+                else if (value.length() == 8 || value.length() == 10)
+                    attributeItem2.addElement("Value").addText(value.substring(0,4) + "-" + value.substring(4,6) + "-" + value.substring(6,8));
+            }
+            else
+                attributeItem2.addElement("Value").addText(value);
+        }
+
+        else
+            attributeItem2.addElement("Value");
     }
     public Element addEntity(AudioFile audioFile, Element entityData) {
         addAttribute(entityData,"clipguid","素材GUID",audioFile.getGuid());
-        addAttribute(entityData,"name","素材名称",audioFile.getName_());
-        addAttribute(entityData,"clipname","素材名称","");
-        addAttribute(entityData,"creatorcode","创建人编码",audioFile.getCreateUser_());
-        Element attributeItem2 = entityData.addElement("AttributeItem");
-        attributeItem2.addElement("ItemCode").addText("loginname");
-        attributeItem2.addElement("Value").addText("");
+//        addAttribute(entityData,"name","素材名称",audioFile.getName_());
+//        addAttribute(entityData,"clipname","素材名称",audioFile.getName_());
+        addAttribute(entityData,"creatorcode","创建人编码","c64b768cca1a4bc0b36b136f1b4cfe0b");
+//        Element attributeItem2 = entityData.addElement("AttributeItem");
+//        attributeItem2.addElement("ItemCode").addText("loginname");
+//        attributeItem2.addElement("Value");
 
         Element attributeItem1 = entityData.addElement("AttributeItem");
         attributeItem1.addElement("ItemCode").addText("columncode");
-        attributeItem1.addElement("Value").addText("");
+        attributeItem1.addElement("Value");
         addAttribute(entityData,"columnname","栏目名称","");
 
 
-        addAttribute(entityData,"name_","题名",audioFile.getName_());
+        addAttribute(entityData,"name","题名",audioFile.getName_());
         addAttribute(entityData,"createdate","拍摄时间",audioFile.getCreateDate());
         addAttribute(entityData,"camerist","拍摄地点",audioFile.getCamerist());
         addAttribute(entityData,"baodaorenwu","记录人物",audioFile.getBaodaorenwu());
         addAttribute(entityData,"description","描述",audioFile.getDescription());
         addAttribute(entityData,"categorycode","组织结构",audioFile.getCategoryCode());
         addAttribute(entityData,"yewu","业务板块",audioFile.getYewu());
-        addAttribute(entityData,"privilege_","等级",audioFile.getPrivilege_());
+        addAttribute(entityData,"privilege","等级",audioFile.getPrivilege_());
         addAttribute(entityData,"creator","摄像",audioFile.getCreator());
-        addAttribute(entityData,"createUser_","入库者",audioFile.getCreateUser_());
-        addAttribute(entityData,"createDate_","入库时间",audioFile.getCreateDate_());
+        addAttribute(entityData,"createUser","入库者","张祖新");
+        addAttribute(entityData,"createDate","入库时间",audioFile.getCreateDate_());
 
 
 
@@ -56,34 +78,34 @@ public class XMLDealer {
 
     public Element addEntity(PhotoFile photoFile, Element entityData) {
         addAttribute(entityData,"clipguid","素材GUID",photoFile.getGuid());
-        addAttribute(entityData,"name","素材名称",photoFile.getName_());
-        addAttribute(entityData,"clipname","素材名称","");
-        addAttribute(entityData,"creatorcode","创建人编码",photoFile.getCreateUser_());
-        Element attributeItem2 = entityData.addElement("AttributeItem");
-        attributeItem2.addElement("ItemCode").addText("loginname");
-        attributeItem2.addElement("Value").addText("");
+//        addAttribute(entityData,"name","素材名称",photoFile.getName_());
+//        addAttribute(entityData,"clipname","素材名称",photoFile.getName_());
+        addAttribute(entityData,"creatorcode","创建人编码","c64b768cca1a4bc0b36b136f1b4cfe0b");
+//        Element attributeItem2 = entityData.addElement("AttributeItem");
+//        attributeItem2.addElement("ItemCode").addText("loginname");
+//        attributeItem2.addElement("Value");
 
         Element attributeItem1 = entityData.addElement("AttributeItem");
         attributeItem1.addElement("ItemCode").addText("columncode");
-        attributeItem1.addElement("Value").addText("");
+        attributeItem1.addElement("Value");
         addAttribute(entityData,"columnname","栏目名称","");
 
 
 
-        addAttribute(entityData,"name_","图片题名",photoFile.getName_());
+        addAttribute(entityData,"name","图片题名",photoFile.getName_());
         addAttribute(entityData,"createdate","拍摄时间",photoFile.getCreateDate());
         addAttribute(entityData,"camerist","拍摄地点",photoFile.getCamerist());
         addAttribute(entityData,"baodaorenwu","记录人物",photoFile.getBaodaorenwu());
         addAttribute(entityData,"description","内容描述",photoFile.getDescription());
         addAttribute(entityData,"categorycode","组织结构",photoFile.getCategoryCode());
         addAttribute(entityData,"yewu","业务板块",photoFile.getYewu());
-        addAttribute(entityData,"privilege_","等级",photoFile.getPrivilege_());
+        addAttribute(entityData,"privilege","等级",photoFile.getPrivilege_());
         addAttribute(entityData,"keyword","关键字",photoFile.getKeyWord());
         addAttribute(entityData,"creator","拍摄人员",photoFile.getCreator());
-        addAttribute(entityData,"createUser_","入库者",photoFile.getCreateUser_());
-        addAttribute(entityData,"createDate_","入库时间",photoFile.getCreateDate_());
+        addAttribute(entityData,"createUser","入库者","张祖新");
+        addAttribute(entityData,"createDate","入库时间",photoFile.getCreateDate_());
         addAttribute(entityData,"filesize","文件大小",String.valueOf(photoFile.getFileSize()));
-        addAttribute(entityData,"fileext","单行文本",photoFile.getFileext());
+        addAttribute(entityData,"fileext","单行文本","JPG");
 
 
 
@@ -145,20 +167,20 @@ public class XMLDealer {
 
             Element contentInfo = root.addElement("ContentInfo");
             contentInfo.addElement("ContentID").addText(audioFile.getGuid());
-            contentInfo.addElement("TypeID").addText("video");
+            contentInfo.addElement("TypeID").addText("Clip");
             contentInfo.addElement("TypeName").addText("视音频");
             Element contentData = contentInfo.addElement("ContentData");
             Element contentFile = contentData.addElement("ContentFile");
             Element entityData = contentData.addElement("EntityData");
-
-            Element fileItem = contentFile.addElement("FileItem");
-            String guid = new GUID().toString().replace("-","");
-            fileItem.addElement("FileGUID").addText(guid);
-            Element fileName1 = fileItem.addElement("FileName");
-            fileName1.addElement("FullPath").addText(audioFile.getStreamMedia().substring(1).replace("/","\\"));
+//
+//            Element fileItem = contentFile.addElement("FileItem");
+//            String guid = new GUID().toString().replace("-","");
+//            fileItem.addElement("FileGUID").addText(guid);
+//            Element fileName1 = fileItem.addElement("FileName");
+//            fileName1.addElement("FullPath").addText(audioFile.getStreamMedia().substring(1).replace("/","\\"));
 
             Element fileItem2 = contentFile.addElement("FileItem");
-            String guid2 = new GUID().toString().replace("-","");;
+            String guid2 = new GUID().toString().replace("-","");
             fileItem2.addElement("FileGUID").addText(guid2);
             Element fileName2 = fileItem2.addElement("FileName");
             String fullPath = audioFile.getDigitalMater();
